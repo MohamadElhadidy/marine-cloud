@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
+use App\Models\Traits\RelatesToTeams;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Obj extends Model
 {
+    use RelatesToTeams;
+
     protected $table = 'objects';
 
     protected $fillable = [
