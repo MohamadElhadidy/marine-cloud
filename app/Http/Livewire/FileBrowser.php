@@ -20,6 +20,8 @@ class FileBrowser extends Component
         'name' => ''
     ];
 
+    public $showingFileUploadForm = false;
+
     public function renameObject()
     {
         $this->validate([

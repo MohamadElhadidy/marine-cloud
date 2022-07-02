@@ -17,6 +17,10 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!-- Load FilePond library -->
+        <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
