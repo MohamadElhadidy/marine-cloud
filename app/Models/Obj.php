@@ -7,10 +7,11 @@ use App\Models\Traits\RelatesToTeams;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Obj extends Model
 {
-    use RelatesToTeams;
+    use RelatesToTeams, HasRecursiveRelationships;
 
     protected $table = 'objects';
 
@@ -28,10 +29,5 @@ class Obj extends Model
     public function objectable(): MorphTo
     {
         return $this->morphTo();
-    }
-
-    public function children(): HasMany
-    {
-        return $this->hasMany(Obj::class, 'parent_id', 'id');
     }
 }
