@@ -7,7 +7,7 @@
         </div>
         <div class="order-2">
             <div>
-                <button class="bg-gray-200 px-6 h-12 rounded-lg mr-2">
+                <button wire:click="$toggle('creatingNewFolder')" class="bg-gray-200 px-6 h-12 rounded-lg mr-2">
                     New Folder
                 </button>
                 <button class="bg-blue-600 text-white px-6 h-12 rounded-lg mr-2">
@@ -50,6 +50,30 @@
                 </thead>
 
                 <tbody>
+                @if($creatingNewFolder)
+                    <tr class="border-gray-100 border-b-2 hover:bg-gray-100">
+                        <td class="p-3">
+                            <form wire:submit.prevent="createFolder" class="flex items-center">
+                                <input wire:model.defer="newFolderState.name" type="text"
+                                       class="w-full px-3 h-10 border-2 border-gray-200 rounded-lg mr-2"
+                                >
+
+                                <button type="submit" class="bg-blue-600 text-white px-6 h-10 rounded-lg mr-2">
+                                    Create
+                                </button>
+
+                                <button wire:click="$toggle('creatingNewFolder')"
+                                        class="bg-gray-200 px-6 h-10 rounded-lg mr-2"
+                                >
+                                    Cancel
+                                </button>
+                            </form>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endif
                 @foreach($object->children as $child)
                     <tr class="border-gray-100 @if(! $loop->last) border-b-2 @endif hover:bg-gray-100">
                         <td class="py-2 px-3 flex items-center">
