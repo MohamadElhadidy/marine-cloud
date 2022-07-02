@@ -91,15 +91,31 @@
                                 </svg>
                             @endif
 
-                            @if($child->objectable_type === 'folder')
-                                <a href="{{ route('files', ['uuid' => $child->uuid]) }}"
-                                   class="p-2 font-bold text-blue-600 flex-grow">
-                                    {{ $child->objectable->name }}
-                                </a>
-                            @elseif($child->objectable_type === 'file')
-                                <a href="" class="p-2 font-bold text-blue-600 flex-grow">
-                                    {{ $child->objectable->name }}
-                                </a>
+                            @if($renamingObject === $child->id)
+                                <form wire:submit.prevent="renameObject" class="flex items-center ml-2 flex-grow">
+                                    <input wire:model.defer="renamingObjectState.name" type="text"
+                                           class="w-full px-3 h-10 border-2 border-gray-200 rounded-lg mr-2"
+                                    >
+
+                                    <button type="submit" class="bg-blue-600 text-white px-6 h-10 rounded-lg mr-2">
+                                        Rename
+                                    </button>
+
+                                    <button wire:click="$set('renamingObject', null)" class="bg-gray-200 px-6 h-10 rounded-lg mr-2">
+                                        Cancel
+                                    </button>
+                                </form>
+                            @else
+                                @if($child->objectable_type === 'folder')
+                                    <a href="{{ route('files', ['uuid' => $child->uuid]) }}"
+                                       class="p-2 font-bold text-blue-600 flex-grow">
+                                        {{ $child->objectable->name }}
+                                    </a>
+                                @elseif($child->objectable_type === 'file')
+                                    <a href="" class="p-2 font-bold text-blue-600 flex-grow">
+                                        {{ $child->objectable->name }}
+                                    </a>
+                                @endif
                             @endif
                         </td>
                         <td class="py-2 px-3">
@@ -116,7 +132,8 @@
                             <div class="flex justify-end items-center">
                                 <ul class="flex items-center">
                                     <li class="mr-4">
-                                        <button class="text-gray-400 font-bold">
+                                        <button wire:click="$set('renamingObject', {{ $child->id }})"
+                                                class="text-gray-400 font-bold">
                                             Rename
                                         </button>
                                     </li>

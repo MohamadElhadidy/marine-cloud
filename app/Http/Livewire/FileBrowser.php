@@ -2,16 +2,49 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Obj;
 use Livewire\Component;
 
 class FileBrowser extends Component
 {
     public $object;
     public $ancestors;
+
     public $creatingNewFolder = false;
     public $newFolderState = [
         'name' => ''
     ];
+
+    public $renamingObject;
+    public $renamingObjectState = [
+        'name' => ''
+    ];
+
+    public function renameObject()
+    {
+        $this->validate([
+            'renamingObjectState.name' => 'required|max:255'
+        ]);
+
+        Obj::forCurrentTeam()->find($this->renamingObject)->objectable->update($this->renamingObjectState);
+
+        $this->object = $this->object->fresh();
+
+        $this->renamingObject = null;
+    }
+
+    public function updatingRenamingObject($id)
+    {
+        if ($id === null) {
+            $this->reset($this->renamingObjectState);
+        }
+
+        if ($object = Obj::forCurrentTeam()->find($id)) {
+            $this->renamingObjectState = [
+                'name' => $object->objectable->name
+            ];
+        }
+    }
 
     public function createFolder()
     {
