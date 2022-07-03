@@ -26,6 +26,17 @@ class FileBrowser extends Component
 
     public $showingFileUploadForm = false;
 
+    public $confirmingObjectDeletion;
+
+    public function deleteObject()
+    {
+        Obj::forCurrentTeam()->find($this->confirmingObjectDeletion)->delete();
+
+        $this->confirmingObjectDeletion = null;
+
+        $this->object = $this->object->fresh();
+    }
+
     public function updatedUpload($upload)
     {
         $object = $this->currentTeam->objects()->make([

@@ -138,7 +138,7 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="text-red-400 font-bold">
+                                        <button wire:click="$set('confirmingObjectDeletion', {{ $child->id }})" class="text-red-400 font-bold">
                                             Delete
                                         </button>
                                     </li>
@@ -158,6 +158,26 @@
             </div>
         @endif
     </div>
+
+    <x-jet-dialog-modal wire:model="confirmingObjectDeletion">
+        <x-slot name="title">
+            Delete
+        </x-slot>
+
+        <x-slot name="content">
+            Are you sure you want to delete this?
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$set('confirmingObjectDeletion', null)" wire:loading.attr="disabled">
+                Nevermind
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button wire:click="deleteObject" class="ml-2">
+                Delete
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 
     <x-jet-modal wire:model="showingFileUploadForm">
         <div
