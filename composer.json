@@ -11,9 +11,11 @@
         "laravel/framework": "^8.75",
         "laravel/jetstream": "~2.8.5",
         "laravel/sanctum": "^2.11",
+        "laravel/scout": "^9.4",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "staudenmeir/laravel-adjacency-list": "^1.0"
+        "staudenmeir/laravel-adjacency-list": "^1.0",
+        "teamtnt/laravel-scout-tntsearch-driver": "^11.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

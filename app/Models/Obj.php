@@ -3,17 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use App\Models\Traits\RelatesToTeams;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Obj extends Model
 {
-    use RelatesToTeams, HasRecursiveRelationships;
+    use RelatesToTeams, HasRecursiveRelationships, Searchable;
 
     protected $table = 'objects';
+
+    public $asYouType = true;
 
     protected $fillable = [
         'parent_id'
