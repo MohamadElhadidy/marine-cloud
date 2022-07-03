@@ -123,7 +123,7 @@
                                         {{ $child->objectable->name }}
                                     </a>
                                 @elseif($child->objectable_type === 'file')
-                                    <a href="" class="p-2 font-bold text-blue-600 flex-grow">
+                                    <a href="{{ route('file.download', $child->objectable) }}" class="p-2 font-bold text-blue-600 flex-grow">
                                         {{ $child->objectable->name }}
                                     </a>
                                 @endif

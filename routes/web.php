@@ -25,3 +25,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 });
 
 Route::get('files', [FileController::class, 'index'])->name('files');
+Route::get('files/{file}', [FileController::class, 'download'])->name('file.download');
