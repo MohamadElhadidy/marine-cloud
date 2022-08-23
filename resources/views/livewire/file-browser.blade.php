@@ -111,7 +111,7 @@
                                         Rename
                                     </button>
 
-                                    <button wire:click="$set('renamingObject', null)"
+                                    <button wire:click="$set('renamingObject', $child->id)"
                                             class="bg-gray-200 px-6 h-10 rounded-lg mr-2">
                                         Cancel
                                     </button>

@@ -15,14 +15,23 @@ use App\Http\Controllers\FileController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('files', [FileController::class, 'index'])->name('files');
+Route::get('files/{file}', [FileController::class, 'download'])->name('file.download');
 });
 
-Route::get('files', [FileController::class, 'index'])->name('files');
-Route::get('files/{file}', [FileController::class, 'download'])->name('file.download');
+
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('tasks', \App\Http\Controllers\TasksController::class);
+
+    Route::resource('users', \App\Http\Controllers\UsersController::class);
+});
