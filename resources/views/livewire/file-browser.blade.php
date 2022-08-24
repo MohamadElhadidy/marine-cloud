@@ -137,11 +137,21 @@
                             @endif
                         </td>
                         <td class="py-2 px-3">
-                            {{ $child->created_at->diffForHumans() }}
+                            {{ $child->created_at->diffForHumans() }} 
                         </td>
                         <td class="py-2 px-3">
                             <div class="flex justify-end items-center">
                                 <ul class="flex items-center">
+                                    @if($child->objectable_type === 'file')
+                                    <li class="mr-4">
+                                        <button onclick="{{ route('file.download', $child->objectable) }}"
+                                                class=" text-blue-600 font-bold">
+                                            Download 
+                                        </button>
+                                    
+                                    </li>
+                                    @endif
+                                    @if ($updatePermission)
                                     <li class="mr-4">
                                         <button wire:click="$set('renamingObject', {{ $child->id }})"
                                                 class="text-gray-400 font-bold">
@@ -154,6 +164,7 @@
                                             Delete
                                         </button>
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                         </td>

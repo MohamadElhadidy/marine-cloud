@@ -14,6 +14,7 @@ class FileBrowser extends Component
     public $upload;
     public $object;
     public $ancestors;
+    public $updatePermission = false;
 
     public $creatingNewFolder = false;
     public $newFolderState = [
@@ -31,6 +32,7 @@ class FileBrowser extends Component
 
     public function getResultsProperty()
     {
+        
         if (strlen($this->query)) {
             return Obj::search($this->query)
                 ->where('team_id', $this->currentTeam->id)
@@ -126,8 +128,10 @@ class FileBrowser extends Component
         return auth()->user()->currentTeam;
     }
 
+
     public function render()
     {
+        $this->updatePermission = auth()->user()->hasTeamPermission($this->currentTeam, 'update');
         return view('livewire.file-browser');
     }
 }
