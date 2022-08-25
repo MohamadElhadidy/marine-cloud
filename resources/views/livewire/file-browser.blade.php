@@ -1,11 +1,13 @@
 <div>
     {{-- Search and buttons --}}
+    
     <div class="flex flex-wrap items-center justify-between mb-4">
         <div class="flex-grow md:mr-3 mt-4 md:mt-0 w-full md:w-auto order-3 md:order-1">
             <input wire:model="query" type="search" placeholder="Search files and folders"
                    class="w-full px-3 h-12 border-gray-300 border-2 rounded-lg">
         </div>
         <div class="order-2">
+             @if ($updatePermission)
             <div>
                 <button wire:click="$toggle('creatingNewFolder')" class="bg-gray-200 px-6 h-12 rounded-lg mr-2">
                     New Folder
@@ -15,9 +17,10 @@
                     Upload Files
                 </button>
             </div>
+              @endif
         </div>
     </div>
-
+  
     <div class="border-2 border-gray-300 rounded-lg">
         {{-- breadcrumbs --}}
         <div class="py-2 px-3">
